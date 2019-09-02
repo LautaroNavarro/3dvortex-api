@@ -1,0 +1,38 @@
+FORMAT: 1A
+HOST: http://www.3dvortex.com/
+
+# 3dVortex
+
+3dVortex is an API that allows you to use a 3d printing service through HTTP
+
+## Models Collection [/questions]
+
+### List All Models [GET]
+
++ Response 200 (application/json)
+    + Attributes
+        + models (array[Model])
+        + pagination (Pagination)
+
+# Data Structures
+
+## Model (object)
++ id: 1 (string) - The ID of model
++ name: groot (string) - The name of the model
++ image: https://www.amazon.com/models/1/img/ (string) - The url image of the model
++ model: https://www.amazon.com/models/1/model/ (string) - The url model of the model
++ volumen: 35 (string) - The volume of the model expresed in c3
++ category (enum[string]) - The category of the model
+    + Members
+        + house
+        + to be defined
++ privacy (enum[string]) - The privacy level of the model
+    + Members
+        + public - Public level
+        + private - Private level
+
+## Pagination (object)
++ count: 120 (string) - The total number of objects across all pages
++ number: 1 (string) - The current page number (starts at 1)
++ size: 50 (string) - The number of objects on each page
++ more_items: false (boolean)
