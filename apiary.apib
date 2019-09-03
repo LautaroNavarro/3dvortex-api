@@ -5,14 +5,25 @@ HOST: http://www.3dvortex.com/
 
 3dVortex is an API that allows you to use a 3d printing service through HTTP
 
-## Models Collection [/questions]
+## Models Collection
 
-### List All Models [GET]
+### List all models [GET /models/]
 
 + Response 200 (application/json)
     + Attributes
         + models (array[Model])
         + pagination (Pagination)
+
+### List all user models [GET /users/{user_id}/models/]
+
++ Parameters
+    + user_id: 1 (string, required) - User Id
++ Request
+    + Headers
+
+            Token: PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
 
 # Data Structures
 
