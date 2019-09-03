@@ -7,8 +7,13 @@ HOST: http://www.3dvortex.com/
 
 ## Models Collection
 
-### List all models [GET /models/]
+### List all models [GET /models/{?new_models}{?popular_models}{?name}{?categories}]
 
++ Parameters
+    + new_models: true (boolean, optional) - Get the most recient models
+    + popular_models: false (boolean, optional) - Get the most printed models
+    + name: ModelName (string, optional) - Filter models by name
+    + categories: house (array[string], optional) - Filter models by categories
 + Response 200 (application/json)
     + Attributes
         + models (array[Model])
