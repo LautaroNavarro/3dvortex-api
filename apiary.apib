@@ -107,6 +107,34 @@ HOST: http://www.3dvortex.com/
               "message": "The requested resource does not exist"
             }
 
+### Delete model [DELETE /{model_id}/]
+
++ Parameters
+    + model_id: 1 (number, required) - Model id
++ Request
+
+    + Headers
+
+            Token: PERSONAL_SESSION_TOKEN
+
++ Response 204 (application/json)
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+
 ## User Models Collection [/users/{user_id}/models/]
 
 ### List all user models [GET]
@@ -158,7 +186,8 @@ HOST: http://www.3dvortex.com/
             {
                 "name": "groot",
                 "category": "house",
-                "privacy": "public"
+                "privacy": "public",
+                "model": "https://www.amazon.com/models/1/img/"
             }
 
     + Headers
