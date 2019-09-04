@@ -61,6 +61,52 @@ HOST: http://www.3dvortex.com/
               "message": "The requested resource does not exist"
             }
 
+### Update model [PUT /{model_id}/]
+
++ Parameters
+    + model_id: 1 (number, required) - Model id
++ Request
+
+    + Body
+
+            {
+                "name": "groot",
+                "category": "house",
+                "privacy": "public"
+            }
+
+    + Headers
+
+            Token: PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "groot",
+                "category": "house",
+                "privacy": "public",
+                "image" : "",
+                "model" : "",
+                "volumen" : "32"
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
 ## User Models Collection [/users/{user_id}/models/]
 
 ### List all user models [GET]
