@@ -5,9 +5,9 @@ HOST: http://www.3dvortex.com/
 
 3dVortex is an API that allows you to use a 3d printing service through HTTP
 
-## Models Collection [/models]
+## Models Collection [/models/]
 
-### List all models [GET /{?new_models}{?popular_models}{?name}{?categories}]
+### List all models [GET /models/{?new_models}{?popular_models}{?name}{?categories}]
 
 + Parameters
     + new_models: true (boolean, optional) - Get the most recient models
@@ -29,7 +29,7 @@ HOST: http://www.3dvortex.com/
                 }
             }
 
-### Get model [GET /{model_id}/]
+### Get model [GET /models/{model_id}/]
 
 + Parameters
     + model_id: 1 (number, required) - Model id
@@ -61,7 +61,7 @@ HOST: http://www.3dvortex.com/
               "message": "The requested resource does not exist"
             }
 
-### Update model [PUT /{model_id}/]
+### Update model [PUT /models/{model_id}/]
 
 + Parameters
     + model_id: 1 (number, required) - Model id
@@ -107,7 +107,7 @@ HOST: http://www.3dvortex.com/
               "message": "The requested resource does not exist"
             }
 
-### Delete model [DELETE /{model_id}/]
+### Delete model [DELETE /models/{model_id}/]
 
 + Parameters
     + model_id: 1 (number, required) - Model id
@@ -137,7 +137,7 @@ HOST: http://www.3dvortex.com/
 
 ## User Models Collection [/users/{user_id}/models/]
 
-### List all user models [GET]
+### List all user models [GET /users/{user_id}/models/]
 
 + Parameters
     + user_id: 1 (string, required) - User Id
@@ -175,7 +175,7 @@ HOST: http://www.3dvortex.com/
               "message": "The requested resource does not exist"
             }
 
-### Create new model [POST]
+### Create new model [POST /users/{user_id}/models/]
 
 + Parameters
     + user_id: 1 (string, required) - User Id
@@ -221,6 +221,34 @@ HOST: http://www.3dvortex.com/
               "error": "NOT_FOUND",
               "message": "The requested resource does not exist"
             }
+
+
+## Media Collection [/media]
+
+### Update 3d model [POST /media/models/]
+
+This endpoint allow you to upload a 3d model to our s3 bucket, it receives a binary file through the body request with mime type octet-stream
+
++ Request (application/octet-stream)
+
+    + Headers
+
+            Token: PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "model": "https://www.amazon.com/models/1/img/"
+            }
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
 
 # Data Structures
 
