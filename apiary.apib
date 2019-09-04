@@ -15,9 +15,19 @@ HOST: http://www.3dvortex.com/
     + name: ModelName (string, optional) - Filter models by name
     + categories: house (array[string], optional) - Filter models by categories
 + Response 200 (application/json)
-    + Attributes
-        + models (array[Model])
-        + pagination (Pagination)
+    + Body
+
+            {
+                "models": {
+                            "id": "1",
+                            "name": "groot",
+                            "category": "house",
+                            "privacy": "public",
+                            "image" : "",
+                            "model" : "",
+                            "volumen" : "32"
+                }
+            }
 
 ## User Models Collection [/users/{user_id}/models/]
 
@@ -31,7 +41,33 @@ HOST: http://www.3dvortex.com/
             Token: PERSONAL_SESSION_TOKEN
 
 + Response 200 (application/json)
+    + Body
+
+            {
+                "models": {
+                            "id": "1",
+                            "name": "groot",
+                            "category": "house",
+                            "privacy": "public",
+                            "image" : "",
+                            "model" : "",
+                            "volumen" : "32"
+                }
+            }
 + Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
 
 ### Create new model [POST]
 
@@ -52,8 +88,32 @@ HOST: http://www.3dvortex.com/
             Token: PERSONAL_SESSION_TOKEN
 
 + Response 200 (application/json)
-+ Response 401
+    + Body
 
+            {
+                "id": "1",
+                "name": "groot",
+                "category": "house",
+                "privacy": "public",
+                "image" : "",
+                "model" : "",
+                "volumen" : "32"
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
 
 # Data Structures
 
