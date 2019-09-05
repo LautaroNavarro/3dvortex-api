@@ -61,6 +61,55 @@ HOST: http://www.3dvortex.com/
               "message": "The requested resource does not exist"
             }
 
+### Create new model [POST /models/]
+
+You will need admin access to create canonic models
+
++ Request
+
+    + Body
+
+            {
+                "name": "groot",
+                "category": "house",
+                "privacy": "public",
+                "model": "https://www.amazon.com/models/1/img/"
+            }
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "groot",
+                "category": "house",
+                "privacy": "public",
+                "image" : "",
+                "model" : "",
+                "volumen" : "32"
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+
+
 ### Update model [PUT /models/{model_id}/]
 
 + Parameters
