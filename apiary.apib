@@ -77,7 +77,7 @@ HOST: http://www.3dvortex.com/
 
     + Headers
 
-            Token: PERSONAL_SESSION_TOKEN
+            Token: bearer PERSONAL_SESSION_TOKEN
 
 + Response 200 (application/json)
     + Body
@@ -115,7 +115,7 @@ HOST: http://www.3dvortex.com/
 
     + Headers
 
-            Token: PERSONAL_SESSION_TOKEN
+            Token: bearer PERSONAL_SESSION_TOKEN
 
 + Response 204 (application/json)
 
@@ -144,7 +144,7 @@ HOST: http://www.3dvortex.com/
 + Request
     + Headers
 
-            Token: PERSONAL_SESSION_TOKEN
+            Token: bearer PERSONAL_SESSION_TOKEN
 
 + Response 200 (application/json)
     + Body
@@ -192,7 +192,7 @@ HOST: http://www.3dvortex.com/
 
     + Headers
 
-            Token: PERSONAL_SESSION_TOKEN
+            Token: bearer PERSONAL_SESSION_TOKEN
 
 + Response 201 (application/json)
     + Body
@@ -233,7 +233,7 @@ This endpoint allow you to upload a 3d model to our s3 bucket, it receives a bin
 
     + Headers
 
-            Token: PERSONAL_SESSION_TOKEN
+            Token: bearer PERSONAL_SESSION_TOKEN
 
 + Response 200 (application/json)
     + Body
@@ -249,6 +249,38 @@ This endpoint allow you to upload a 3d model to our s3 bucket, it receives a bin
               "message": "You are not authorized to execute the requested action"
             }
 
+
+## Authentication Collection [/authentication]
+
+### Authentication [POST]
+
+This endpoint allows you to authenticate yourself and get a JWT. This is made through HMAC authentication. The useful life of the JWT is 24 hours.
+The password must follow the process above (pseudocode).
+- var crytographer = hmac("SHA256", password);
+- string secureHash = crytographer.Hash(current_utc_date);
+- string hmacHeader = base64(secureHash);
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authentication: hmac username:hmacHeader
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+            }
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
 
 # Data Structures
 
