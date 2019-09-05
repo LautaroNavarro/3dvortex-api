@@ -331,6 +331,162 @@ The password must follow the process above (pseudocode).
               "message": "You are not authorized to execute the requested action"
             }
 
+
+## Materials [/materials/]
+
+### List all materials [GET /materials/]
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "materials": [
+                    {
+                        "id": "1",
+                        "name": "PLA",
+                        "description": "This is the description of the material",
+                        "price_per_c3:": "12.3",
+                    }
+                ]
+            }
+
+### Get material [GET /materials/{material_id}/]
+
++ Parameters
+    + material_id: 1 (number, required) - Material id
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "PLA",
+                "description": "This is the description of the material",
+                "price_per_c3:": "12.3",
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### Create material [POST /materials/]
+
+You will need admin access to create materials
+
++ Request
+
+    + Body
+
+            {
+                "name": "PLA",
+                "description": "This is the description of the material",
+                "price_per_c3:": "12.3",
+            }
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "PLA",
+                "description": "This is the description of the material",
+                "price_per_c3:": "12.3",
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
+
+### Update material [PUT /materials/{material_id}/]
+
+You will need admin access to edit materials
+
++ Parameters
+    + material_id: 1 (number, required) - Material id
++ Request
+
+    + Body
+
+            {
+                "name": "PLA",
+                "description": "This is the description of the material",
+                "price_per_c3:": "12.3",
+            }
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "PLA",
+                "description": "This is the description of the material",
+                "price_per_c3:": "12.3",
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### Delete material [DELETE /materials/{material_id}/]
+
+You will need admin access to edit materials
+
++ Parameters
+    + material_id: 1 (number, required) - Material id
++ Request
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 204 (application/json)
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+
+
 # Data Structures
 
 ## Model (object)
