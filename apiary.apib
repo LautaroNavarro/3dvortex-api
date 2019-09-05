@@ -486,6 +486,155 @@ You will need admin access to edit materials
             }
 
 
+## Categories [/categories/]
+
+### List all categories [GET /categories/]
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "categories": [
+                    {
+                        "id": "1",
+                        "name": "home",
+                        "father_category:": "2",
+                    }
+                ]
+            }
+
+### Get category [GET /categories/{category_id}/]
+
+
++ Parameters
+    + category_id: 1 (number, required) - Category id
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "home",
+                "father_category:": "2",
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### Create category [POST /categories/]
+
+You will need admin access to create categories
+
++ Request
+
+    + Body
+
+            {
+                "name": "home",
+                "father_category:": "2",
+            }
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "home",
+                "father_category:": "2",
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
+
+### Update category [PUT /categories/{category}/]
+
+You will need admin access to edit materials
+
++ Parameters
+    + category: 1 (number, required) - Category id
++ Request
+
+    + Body
+
+            {
+                "name": "home",
+                "father_category:": "2",
+            }
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "home",
+                "father_category:": "2",
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### Delete category [DELETE /categories/{category_id}/]
+
+You will need admin access to edit categories
+
++ Parameters
+    + categories: 1 (number, required) - Category id
++ Request
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 204 (application/json)
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+
 
 # Data Structures
 
