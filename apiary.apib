@@ -609,7 +609,7 @@ You will need admin access to edit materials
 You will need admin access to edit categories
 
 + Parameters
-    + categories: 1 (number, required) - Category id
+    + category_id: 1 (number, required) - Category id
 + Request
 
     + Headers
@@ -634,6 +634,184 @@ You will need admin access to edit categories
               "message": "The requested resource does not exist"
             }
 
+
+## Printers [/printers/]
+
+You will need admin access to manage printers
+
+### List all printers [GET /printers/]
+
++ Request
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "printers": [
+                    {
+                        "id": "1",
+                        "name": "Some cool printer",
+                        "status:": "printing",
+                        "address_id": "1",
+                    }
+                ]
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
+### Get printer [GET /printers/{printer_id}/]
+
++ Request
+
+    + Parameters
+
+        + printer_id: 1 (number, required) - Printer id
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "Some cool printer",
+                "status:": "printing",
+                "address_id": "1",
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
+### Create printer [POST /printers/]
+
++ Request
+
+    + Body
+
+            {
+                "name": "Some cool printer",
+                "address_id": "1",
+            }
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "Some cool printer",
+                "status:": "printing",
+                "address_id": "1",
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
+
+### Update printer [PUT /printers/{printer_id}/]
+
++ Parameters
+    + printer_id: 1 (number, required) - Printer id
++ Request
+
+    + Body
+
+            {
+                "name": "Some cool printer",
+                "status:": "printing",
+                "address_id": "1",
+            }
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "name": "Some cool printer",
+                "status:": "printing",
+                "address_id": "1",
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### Delete printer [DELETE /printers/{printer_id}/]
+
++ Parameters
+    + printer_id: 1 (number, required) - Printer id
++ Request
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 204 (application/json)
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
 
 
 # Data Structures
