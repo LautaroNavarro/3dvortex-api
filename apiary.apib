@@ -814,6 +814,214 @@ You will need admin access to manage printers
             }
 
 
+## Prints [/prints/]
+
+
+### List all prints [GET /prints/]
+
+You will need admin access to list all prints
+
++ Request
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "prints": [
+                    {
+                        "id": "1",
+                        "printer_id": "1",
+                        "user_id": "1",
+                        "model_id": "1",
+                        "address_id": "1",
+                        "status": "printing",
+                        "scale": "1",
+                        "purchase_id": "1",
+                        "material_id": "1",
+                    }
+                ]
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
+### Get print [GET /prints/{print_id}/]
+
++ Request
+
+    + Parameters
+
+        + print_id: 1 (number, required) - Print id
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "printer_id": "1",
+                "user_id": "1",
+                "model_id": "1",
+                "address_id": "1",
+                "status": "printing",
+                "scale": "1",
+                "purchase_id": "1",
+                "material_id": "1",
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
+### Create print [POST /prints/]
+
++ Request
+
+    + Body
+
+            {
+                "user_id": "1",
+                "model_id": "1",
+                "address_id": "1",
+                "scale": "1",
+                "purchase_id": "1",
+                "material_id": "1",
+            }
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "printer_id": "1",
+                "user_id": "1",
+                "model_id": "1",
+                "address_id": "1",
+                "status": "printing",
+                "scale": "1",
+                "purchase_id": "1",
+                "material_id": "1",
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
+
+### Update print [PUT /prints/{print_id}/]
+
+
++ Parameters
+    + print_id: 1 (number, required) - Print id
++ Request
+
+    + Body
+
+            {
+                "printer_id": "1",
+                "user_id": "1",
+                "model_id": "1",
+                "address_id": "1",
+                "status": "printing",
+                "scale": "1",
+                "purchase_id": "1",
+                "material_id": "1",
+            }
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "printer_id": "1",
+                "user_id": "1",
+                "model_id": "1",
+                "address_id": "1",
+                "status": "printing",
+                "scale": "1",
+                "purchase_id": "1",
+                "material_id": "1",
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### Delete print [DELETE /prints/{print_id}/]
+
++ Parameters
+    + print_id: 1 (number, required) - Print id
++ Request
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 204 (application/json)
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
 # Data Structures
 
 ## Model (object)
