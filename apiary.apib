@@ -189,6 +189,35 @@ You will need admin access to create canonic models
 ## Users [/users/{user_id}]
 
 
+### Create new user [POST /users/]
+
+
++ Request
+
+    + Body
+
+            {
+                "name": "Lautaro",
+                "lastname": "Navarro",
+                "email": "lautaronavarro@email.com",
+                "password": "some-plan-text"
+            }
+
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "2",
+                "email": "lautaronavarro@email.com",
+                "status": "not-confirmed"
+            }
+
+
 ### Create new user address [POST /users/{user_id}/addresses/]
 
 + Parameters
