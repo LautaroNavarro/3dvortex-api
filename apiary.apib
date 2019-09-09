@@ -18,15 +18,17 @@ HOST: http://www.3dvortex.com/
     + Body
 
             {
-                "models": {
-                            "id": "1",
-                            "name": "groot",
-                            "category": "house",
-                            "privacy": "public",
-                            "image" : "",
-                            "model" : "",
-                            "volumen" : "32"
-                }
+                "models": [
+                    {
+                        "id": "1",
+                        "name": "groot",
+                        "category": "house",
+                        "privacy": "public",
+                        "image" : "",
+                        "model" : "",
+                        "volumen" : "32"
+                    }
+                ]
             }
 
 ### Get model [GET /models/{model_id}/]
@@ -184,12 +186,59 @@ You will need admin access to create canonic models
             }
 
 
-## User Models [/users/{user_id}/models/]
+## Users [/users/{user_id}]
 
-### List all user models [GET /users/{user_id}/models/]
+
+### Create new user address [POST /users/{user_id}/addresses/]
 
 + Parameters
-    + user_id: 1 (string, required) - User Id
+    + user_id: 1 (number, required) - User Id
++ Request
+
+    + Body
+
+            {
+                "user_id": "1",
+                "name": "address name",
+                "latitude": "123123.12",
+                "longitude": "123123.12"
+            }
+
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "1"
+                "user_id": "1",
+                "name": "address name",
+                "latitude": "123123.12",
+                "longitude": "123123.12"
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+
+
+### List all user addresses [GET /users/{user_id}/addresses/]
+
++ Parameters
+    + user_id: 1 (number, required) - User Id
 + Request
     + Headers
 
@@ -199,16 +248,17 @@ You will need admin access to create canonic models
     + Body
 
             {
-                "models": {
-                            "id": "1",
-                            "name": "groot",
-                            "category": "house",
-                            "privacy": "public",
-                            "image" : "",
-                            "model" : "",
-                            "volumen" : "32"
-                }
+                "addresses": [
+                    {
+                        "id": "1"
+                        "user_id": "1",
+                        "name": "address name",
+                        "latitude": "123123.12",
+                        "longitude": "123123.12"
+                    }
+                ]
             }
+
 + Response 401 (application/json)
     + Body
 
@@ -223,6 +273,188 @@ You will need admin access to create canonic models
               "error": "NOT_FOUND",
               "message": "The requested resource does not exist"
             }
+
+
+
+### Create new user purchase [POST /users/{user_id}/purchases/]
+
++ Parameters
+    + user_id: 1 (number, required) - User Id
++ Request
+
+    + Body
+
+            {
+                "user_id": "2"
+            }
+
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "user_id": "2",
+                "status": "printing",
+                "price": "103.21"
+            }
+
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### List all user purchases [GET /users/{user_id}/purchases/{?status}]
+
++ Parameters
+    + user_id: 1 (number, required) - User Id
+    + status: in_cart (string, optional) - Desired status
++ Request
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "purchases": [
+                    {
+                        "id": "1",
+                        "user_id": "2",
+                        "status": "printing",
+                        "price": "103.21"
+                    }
+                ]
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### Create new user print [POST /users/{user_id}/prints/]
+
++ Parameters
+    + user_id: 1 (number, required) - User Id
++ Request
+
+    + Body
+
+            {
+                "user_id": "1",
+                "model_id": "1",
+                "address_id": "1",
+                "scale": "1",
+                "purchase_id": "1",
+                "material_id": "1",
+            }
+
+
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "1",
+                "printer_id": "1",
+                "user_id": "1",
+                "model_id": "1",
+                "address_id": "1",
+                "status": "printing",
+                "scale": "1",
+                "purchase_id": "1",
+                "material_id": "1",
+            }
+
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+
+
+### List all user prints [GET /users/{user_id}/prints/{?status}]
+
++ Parameters
+    + user_id: 1 (number, required) - User Id
+    + status: printing (string, optional) - Desired status
++ Request
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "prints": [
+                    {
+                        "id": "1",
+                        "printer_id": "1",
+                        "user_id": "1",
+                        "model_id": "1",
+                        "address_id": "1",
+                        "status": "printing",
+                        "scale": "1",
+                        "purchase_id": "1",
+                        "material_id": "1",
+                    }
+                ]
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
 
 ### Create new user model [POST /users/{user_id}/models/]
 
@@ -256,6 +488,46 @@ You will need admin access to create canonic models
                 "volumen" : "32"
             }
 
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
++ Response 404
+    + Body
+
+            {
+              "error": "NOT_FOUND",
+              "message": "The requested resource does not exist"
+            }
+
+### List all user models [GET /users/{user_id}/models/]
+
++ Parameters
+    + user_id: 1 (string, required) - User Id
++ Request
+    + Headers
+
+            Token: bearer PERSONAL_SESSION_TOKEN
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "models": [
+                    {
+                        "id": "1",
+                        "name": "groot",
+                        "category": "house",
+                        "privacy": "public",
+                        "image" : "",
+                        "model" : "",
+                        "volumen" : "32"
+                    }
+                ]
+            }
 + Response 401 (application/json)
     + Body
 
