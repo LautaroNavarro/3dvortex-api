@@ -217,6 +217,36 @@ You will need admin access to create canonic models
                 "status": "not-confirmed"
             }
 
+### Authenticate user [POST /users/authenticate/]
+
+This endpoint allows you to authenticate yourself and get a JWT. This is made through HMAC authentication. The useful life of the JWT is 24 hours.
+The password must follow the process above (pseudocode).
+- var crytographer = hmac("SHA256", password);
+- string secureHash = crytographer.Hash(current_utc_date);
+- string hmacHeader = base64(secureHash);
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authentication: hmac username:hmacHeader
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+            }
++ Response 401 (application/json)
+    + Body
+
+            {
+              "error": "NOT_AUTHORIZED",
+              "message": "You are not authorized to execute the requested action"
+            }
+
 
 ### Create new user address [POST /users/{user_id}/addresses/]
 
@@ -590,39 +620,6 @@ This endpoint allow you to upload a 3d model to our s3 bucket, it receives a bin
 
             {
                 "model": "https://www.amazon.com/models/1/img/"
-            }
-+ Response 401 (application/json)
-    + Body
-
-            {
-              "error": "NOT_AUTHORIZED",
-              "message": "You are not authorized to execute the requested action"
-            }
-
-
-## Authentication [/authentication]
-
-### Authentication [POST]
-
-This endpoint allows you to authenticate yourself and get a JWT. This is made through HMAC authentication. The useful life of the JWT is 24 hours.
-The password must follow the process above (pseudocode).
-- var crytographer = hmac("SHA256", password);
-- string secureHash = crytographer.Hash(current_utc_date);
-- string hmacHeader = base64(secureHash);
-
-
-+ Request (application/json)
-
-    + Headers
-
-            Authentication: hmac username:hmacHeader
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
             }
 + Response 401 (application/json)
     + Body
